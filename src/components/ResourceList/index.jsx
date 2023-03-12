@@ -1,29 +1,18 @@
-// import { useContext } from 'react';
-// import Filter from "../Filter";
-// import Grid from "@mui/material/Grid";
-// import { AppContext } from '../../AppContext';
+import { useContext } from 'react';
+import { AppContext } from '../../AppContext';
+import { ResourceCard } from '../ResourseCard';
 
 export const ResourceList = () => {
-//   const { dispatch, state } = useContext(AppContext);
-//   console.log('ResourceList state: ', state);
-
+  const { dispatch, state } = useContext(AppContext);
+  const { subtopics } = state;
+  console.log('ResourceList subtopics: ', subtopics);
 
   return (
     <>
-        Resource LIST!
+      {subtopics.length ? subtopics.map((topic) => {
+        return (<ResourceCard key={topic.id} topic={topic} />);
+      }) : null}
     </>
-    // <Grid
-    //   container
-    //   spacing={2}
-    //   style={{ paddingLeft: "50px", paddingRight: "50px" }}
-    // >
-    //   <Grid item lg={6}>
-    //     <Filter />
-    //   </Grid>
-    //   <Grid item lg={6}>
-    //     <Filter />
-    //   </Grid>
-    // </Grid>
   );
 };
 

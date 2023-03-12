@@ -17,13 +17,17 @@ export const Search = () => {
     setInputText(value);
 
     dispatch({
-      type: "FILTER_TOPICS",
+      type: "SEARCH_MATERIAL",
       payload: value,
     });
   }
 
   const clearText = () => {
     setInputText('');
+    dispatch({
+      type: "SEARCH_MATERIAL",
+      payload: '',
+    });
   }
 
   return (

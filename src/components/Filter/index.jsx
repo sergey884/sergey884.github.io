@@ -1,42 +1,53 @@
-// import Box from '@mui/material/Box';
+import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-];
+export const Filter = ({
+  label = '',
+  helperText = '',
+  values = [],
+  onChange,
+  defaultValue,
+  id
+}) => {
+  const [option, setOption] = useState(typeof defaultValue !== 'undefined' ? '' : values[0]?.value);
 
+  useEffect(() => {
+    setOption(typeof defaultValue !== 'undefined' ? '' : values[0]?.value);
+  }, [values]);
 
-export const Filter = () => {
+  const selectOption = (event, child) => {
+    const { id } = child.props;
+    const { target: { value } } = event;
+    // console.log('selectOption---selectOption', id, value);
+
+    setOption(value);
+
+    if (typeof onChange === 'function') {
+      onChange({ id, value });
+    }
+  };
+
   return (
     <TextField
-      id="outlined-select-currency"
+      id={id}
       select
-      label="Select Topic"
-      defaultValue="EUR"
-      helperText="Please select your currency"
+      label={label}
+      value={option}
+      helperText={helperText}
       style={{ width: "100%" }}
+      onChange={selectOption}
     >
-      {currencies.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      ))}
+      {values.length ? values.map((option) => {
+        return (
+          <MenuItem
+            key={option.value}
+            value={option.value}
+            id={option.name}
+          >
+            {option.value}
+          </MenuItem>);
+      }) : null}
     </TextField>
   );
 };
