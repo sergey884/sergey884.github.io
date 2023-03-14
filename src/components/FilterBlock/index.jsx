@@ -25,7 +25,7 @@ export const FilterBlock = () => {
       spacing={2}
       style={{ paddingLeft: "50px", paddingRight: "50px", paddingBottom: "25px", paddingTop: "25px" }}
     >
-      <Grid item lg={6}>
+      <Grid item xs={12} sm={6} md={6} lg={6}>
         <Filter
           label="Select Main Area"
           values={topicsInfo}
@@ -33,7 +33,7 @@ export const FilterBlock = () => {
           id="topic-filter-block"
         />
       </Grid>
-      <Grid item lg={6}>
+      <Grid item xs={12} sm={6} md={6} lg={6}>
         <Filter
           label="Select Topic"
           values={subtopics}

@@ -61,6 +61,33 @@ export const javascript = [
       },
     ],
   },
+  {
+    id: "v8docs",
+    title: "V8 documentation",
+    links: [
+      {
+        title: "V8 Homepage",
+        url: "https://v8.dev/",
+        type: "book",
+      },
+      {
+        title: "JavaScript and WebAssembly features",
+        url: "https://v8.dev/features",
+        type: "book",
+      },
+    ],
+  },
+  {
+    id: "jsspecificationand proposals",
+    title: "JS specification and proposals",
+    links: [
+      {
+        title: "TC39: Specifying JavaScript",
+        url: "https://tc39.es/ ",
+        type: "book",
+      },
+    ],
+  },
 ];
 
 export default javascript;
