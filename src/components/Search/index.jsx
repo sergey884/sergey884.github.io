@@ -1,16 +1,15 @@
 // import Box from '@mui/material/Box';
 import { useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
+// import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import ClearIcon from '@mui/icons-material/Clear';
 import { AppContext } from '../../AppContext';
+import Button from '@mui/material/Button';
 
 export const Search = () => {
   const [inputText, setInputText] = useState('');
-  const { dispatch, state } = useContext(AppContext);
-  // console.log('dispatch: ', dispatch);
-  // console.log('state: ', state);
+  const { dispatch, } = useContext(AppContext);
 
   const searchText = (event) => {
     const { target: { value } } = event
@@ -41,14 +40,23 @@ export const Search = () => {
         endAdornment:
           (
             <InputAdornment position="end">
-              <IconButton
+              {/* <IconButton
                 aria-label="clear text button"
                 onClick={clearText}
-                disabled={inputText.length === 0}
+                disabled={!inputText.length}
                 edge="end"
               >
                 <ClearIcon />
-              </IconButton>
+              </IconButton> */}
+              <Button
+                variant="outlined"
+                aria-label="clear text button"
+                onClick={clearText}
+                disabled={!inputText.length}
+                startIcon={<ClearIcon />}
+              >
+                Clear
+              </Button>
             </InputAdornment>
           )
 

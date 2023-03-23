@@ -22,7 +22,7 @@ export const ResourceCard = ({
           <Typography variant="h5" component="div">
             {title}
           </Typography>
-          <Links links={links} />
+          <Links links={links} id={id} />
           {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Word of the Day
           </Typography>

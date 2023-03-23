@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
@@ -10,7 +11,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ResourceIcon from './ResourceIcon';
 
 export const Links = ({
-  links
+  links = [],
+  id,
 }) => {
   // console.log('Links state: ', links);
 
@@ -18,14 +20,14 @@ export const Links = ({
     <Box sx={{ minWidth: 275 }}>
       <List style={{ width: '100%', bgcolor: 'background.paper' }}>
         {links.length ? links.map((link, index) => {
-          console.log('LINK: ', link);
           const {
             title,
             url,
             type,
           } = link;
+
           return (
-            <>
+            <Fragment key={`${id}_${index}`}>
               <ListItem>
                 <ListItemAvatar>
                   <ResourceIcon type={type} />
@@ -59,7 +61,7 @@ export const Links = ({
                 />
               </ListItem>
               {links.length - 1 !== index ? <Divider variant="inset" component="li" /> : null}
-            </>
+            </Fragment>
           )
         })
           : null}
@@ -68,15 +70,4 @@ export const Links = ({
   );
 };
 
-{/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Word of the Day
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                adjective
-            </Typography>
-            <Typography variant="body2">
-                well meaning and kindly.
-                <br />
-                {'"a benevolent smile"'}
-            </Typography> */}
 export default Links;

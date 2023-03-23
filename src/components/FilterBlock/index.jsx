@@ -1,12 +1,12 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Filter from "../Filter";
 import Grid from "@mui/material/Grid";
 import { AppContext } from '../../AppContext';
 
 export const FilterBlock = () => {
   const { state, dispatch } = useContext(AppContext);
-  console.log('FilterBlock: ', state);
-  const { topicsInfo, subtopics } = state;
+
+  const { topicsInfo, prevSubtopics } = state;
 
   const getSubTopics = (opts) => {
     dispatch({
@@ -16,7 +16,19 @@ export const FilterBlock = () => {
   }
 
   const selectSubTopics = (opts) => {
-    console.log('selectSubTopics>>>>>: ', opts);
+    if (opts.id === 'allsubtopics') {
+      dispatch({
+        type: 'ALL_SUBTOPICS',
+        payload: opts
+      });
+
+      return;
+    }
+
+    dispatch({
+      type: 'FILTER_SUBTOPICS',
+      payload: opts
+    });
   }
 
   return (
@@ -27,19 +39,21 @@ export const FilterBlock = () => {
     >
       <Grid item xs={12} sm={6} md={6} lg={6}>
         <Filter
+          id="topic-filter-block"
           label="Select Main Area"
           values={topicsInfo}
           onChange={getSubTopics}
-          id="topic-filter-block"
+          disabled={!topicsInfo.length}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={6} lg={6}>
         <Filter
+          id="subtopic-filter-block"
           label="Select Topic"
-          values={subtopics}
+          values={prevSubtopics}
           onChange={selectSubTopics}
           defaultValue
-          id="subtopic-filter-block"
+          disabled={!prevSubtopics.length}
         />
       </Grid>
     </Grid>

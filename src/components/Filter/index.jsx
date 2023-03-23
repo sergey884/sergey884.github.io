@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
 export const Filter = ({
+  disabled = false,
   label = '',
   helperText = '',
   values = [],
@@ -14,12 +15,11 @@ export const Filter = ({
 
   useEffect(() => {
     setOption(typeof defaultValue !== 'undefined' ? '' : values[0]?.value);
-  }, [values]);
+  }, [values, defaultValue]);
 
   const selectOption = (event, child) => {
     const { id } = child.props;
     const { target: { value } } = event;
-    // console.log('selectOption---selectOption', id, value);
 
     setOption(value);
 
@@ -32,6 +32,7 @@ export const Filter = ({
     <TextField
       id={id}
       select
+      disabled={disabled}
       label={label}
       value={option}
       helperText={helperText}

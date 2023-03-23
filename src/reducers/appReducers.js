@@ -1,18 +1,26 @@
 import { materials } from '../materials';
 import { searchResource } from '../utils/searchResource';
+import { addSelectOption } from '../utils/addSelectOption';
 import { generateTopics, generateSubTopics } from '../utils/generateTopics';
 
 const topicsInfo = generateTopics(materials);
+const subTopics = generateSubTopics(topicsInfo);
+const allSubtopicOption = {
+  value: 'All', 
+  title: 'All', 
+  name: 'allsubtopics', 
+  id: 'allsubtopics'
+};
 export const initalState = {
   materials,
   filteredTopics: materials,
   topicsInfo,
-  subtopics: generateSubTopics(topicsInfo),
+  subtopics: subTopics,
+  prevSubtopics: addSelectOption(subTopics, allSubtopicOption),
 };
 
 export const appReducer = (state, action) => {
   const { type, payload } = action;
-  // console.log("appReducer: ", action);
 
   switch (type) {
     case 'SEARCH_MATERIAL': {
@@ -20,8 +28,14 @@ export const appReducer = (state, action) => {
       const filteredTopics = searchResource(payload, materials);
       const topicsInfo = generateTopics(filteredTopics);
       const subtopics = generateSubTopics(topicsInfo)
-      // console.log('resources: ', resources);
-      return { ...state, filteredTopics, topicsInfo, subtopics };
+
+      return { 
+        ...state, 
+        filteredTopics, 
+        topicsInfo, 
+        subtopics,
+        prevSubtopics: addSelectOption(subtopics, allSubtopicOption),
+      };
     }
     case 'FILTER_TOPICS': {
       return { ...state, searchText: payload };
@@ -29,11 +43,35 @@ export const appReducer = (state, action) => {
 
     case 'GENERATE_TOPICS': {
       const { topicsInfo } = state;
-      const subtopics = generateSubTopics(topicsInfo, payload)
+      const subtopics = generateSubTopics(topicsInfo, payload);
 
-      // console.log('RES subtopics: ', subtopics);
+      return { 
+        ...state, 
+        subtopics,
+        prevSubtopics: addSelectOption(subtopics, allSubtopicOption),
+      };
+    }
+
+    case 'FILTER_SUBTOPICS': {
+      const { prevSubtopics, } = state;
+      const { id } = payload;
+      const subtopic = prevSubtopics.filter(topic => topic.id === id);
     
-      return { ...state, subtopics };
+      return { 
+        ...state,
+        subtopics: subtopic,
+      };
+    }
+
+    case 'ALL_SUBTOPICS': {
+      const { prevSubtopics, } = state;
+      const { id } = payload;
+      const subtopics = prevSubtopics.filter(topic => topic.id !== id);
+
+      return { 
+        ...state,
+        subtopics: subtopics,
+      };
     }
 
     default:

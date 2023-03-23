@@ -45,7 +45,7 @@ export const javascript = [
       {
         title:
           "You Don't Know JS Yet (book series) - 2nd Edition",
-        url: "https://github.com/getify/You-Dont-Know-JS ",
+        url: "https://github.com/getify/You-Dont-Know-JS",
         type: "book",
       },
       // {
@@ -56,7 +56,7 @@ export const javascript = [
       // },
       {
         title: "You Don't Know JS Yet (book series) - 2nd Edition",
-        url: "https://github.com/getify/You-Dont-Know-JS/tree/2nd-ed ",
+        url: "https://github.com/getify/You-Dont-Know-JS/tree/2nd-ed",
         type: "book",
       },
     ],
@@ -78,13 +78,45 @@ export const javascript = [
     ],
   },
   {
-    id: "jsspecificationand proposals",
+    id: "jsspecificationandproposals",
     title: "JS specification and proposals",
     links: [
       {
         title: "TC39: Specifying JavaScript",
-        url: "https://tc39.es/ ",
+        url: "https://tc39.es/",
         type: "book",
+      },
+    ],
+  },
+  {
+    id: "memorymanagementinv8",
+    title: "Memory mangement in V8",
+    links: [
+      {
+        title: "Visualizing memory management in V8 Engine (JavaScript, NodeJS, Deno, WebAssembly)",
+        url: "https://deepu.tech/memory-management-in-v8/",
+        type: "article",
+      },
+    ],
+  },
+  {
+    id: "v8engineoptimization",
+    title: "V8 engine optimization",
+    links: [
+      {
+        title: "How JavaScript works: inside the V8 engine + 5 tips on how to write optimized code",
+        url: "https://blog.sessionstack.com/how-javascript-works-inside-the-v8-engine-5-tips-on-how-to-write-optimized-code-ac089e62b12e",
+        type: "article",
+      },
+      {
+        title: "Optimizing dynamic JavaScript with inline caches",
+        url: "https://github.com/sq/JSIL/wiki/Optimizing-dynamic-JavaScript-with-inline-caches",
+        type: "article",
+      },
+      {
+        title: "Javascript Hidden Classes and Inline Caching in V8",
+        url: "https://richardartoul.github.io/jekyll/update/2015/04/26/hidden-classes.html",
+        type: "article",
       },
     ],
   },
