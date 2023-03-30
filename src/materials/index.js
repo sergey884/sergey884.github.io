@@ -3,6 +3,8 @@ import nodejs from "./nodejs";
 import performance from './performance';
 import codingexercise from './codingexercises';
 import architecture from './architecture';
+import designPatterns from './designPatterns';
+import oop from './oop';
 
 export const materials = [
   {
@@ -29,6 +31,16 @@ export const materials = [
     id: 'codingexercise',
     title: "Coding exercises",
     topics: codingexercise
+  },
+  {
+    id: 'designpatterns',
+    title: "Design Patterns",
+    topics: designPatterns
+  },
+  {
+    id: 'oop',
+    title: "Object Oriented Programming",
+    topics: oop
   },
 ];
 
