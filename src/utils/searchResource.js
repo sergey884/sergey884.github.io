@@ -8,12 +8,11 @@ export const checkTextInLinks = (textRegExp, links) => {
   const isAnyLink = links.some((it) => {
     const { title } = it;
 
-    // console.log('checkTextInLinks: ', title);
     const isTextExist = textRegExp.test(clearText(title));
 
     return isTextExist;
   });
-  // debugger;
+
   return isAnyLink;
 };
 
@@ -25,7 +24,7 @@ export const searchResource = (text, resources) => {
     const filteredTopics = topics.filter((item) => {
       const { title = '', links } = item;
       const clearedText = clearText(title);
-      const textRegExp = new RegExp(text.toLowerCase(), 'g');
+      const textRegExp = new RegExp(text.trim().toLowerCase(), 'g');
       const isTextExist = textRegExp.test(clearedText);
 
       return isTextExist || checkTextInLinks(textRegExp, links);

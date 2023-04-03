@@ -9,13 +9,27 @@ export const Filter = ({
   values = [],
   onChange,
   defaultValue,
-  id
+  id,
+  value,
 }) => {
-  const [option, setOption] = useState(typeof defaultValue !== 'undefined' ? '' : values[0]?.value);
+  const findValue = () => {
+    if (value) {
+      const { title } = values.find(it => it.id === value) || {};
+
+      return title;
+    }
+
+    return undefined;
+  }
+
+  const initialValue = value ? findValue() : (typeof defaultValue !== 'undefined' ? '' : values[0]?.value)
+
+  const [option, setOption] = useState(initialValue);
 
   useEffect(() => {
-    setOption(typeof defaultValue !== 'undefined' ? '' : values[0]?.value);
-  }, [values, defaultValue]);
+    setOption(value ? findValue() : (typeof defaultValue !== 'undefined' ? '' : values[0]?.value));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values, value, defaultValue]);
 
   const selectOption = (event, child) => {
     const { id } = child.props;

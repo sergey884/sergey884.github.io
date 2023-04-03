@@ -1,4 +1,5 @@
 export const generateTopics = (materials) => {
+  // console.log('generateTopics materials ::::::::::: ', materials);
   const result = materials.reduce((acc, topic) => {
     const { title, id, topics } = topic;
     let res = {
@@ -31,7 +32,7 @@ export const generateTopics = (materials) => {
 
     return acc;
   }, []);
-
+  // console.log('generateTopics::::::::::: ', result);
   return result;
 };
 
@@ -44,6 +45,12 @@ export const generateSubTopics = (topicsInfo, opts = {}) => {
     return subtopics;
   }
   const firstTopic = topicsInfo[0];
-  console.log('topicsInfo[0]: ', topicsInfo, topicsInfo[0]);
+
   return firstTopic ? firstTopic.subtopics : [];
+};
+
+export const isTopicExist = (topicName, materials) => {
+  console.log('topicName, materials: ', topicName, materials, materials.some(it => it.id === topicName));
+
+  return materials.some(it => it.id === topicName);
 };

@@ -5,7 +5,7 @@ import { generateTopics, generateSubTopics } from '../utils/generateTopics';
 
 const topicsInfo = generateTopics(materials);
 const subTopics = generateSubTopics(topicsInfo);
-const allSubtopicOption = {
+export const allSubtopicOption = {
   value: 'All', 
   title: 'All', 
   name: 'allsubtopics', 
@@ -20,6 +20,7 @@ export const initalState = {
 };
 
 export const appReducer = (state, action) => {
+  console.log('STATE: ', state);
   const { type, payload } = action;
 
   switch (type) {

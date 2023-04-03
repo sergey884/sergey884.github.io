@@ -6,58 +6,48 @@ import InputAdornment from '@mui/material/InputAdornment';
 import ClearIcon from '@mui/icons-material/Clear';
 import { AppContext } from '../../AppContext';
 import Button from '@mui/material/Button';
-import { useNavigate, useLocation, useParams, useMatches } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { getQueryParams } from '../../utils/getQueryParams';
 
 export const Search = () => {
   let location = useLocation();
   let navigate = useNavigate();
-  let params = useParams();
-  let matches = useMatches();
-  // console.log('location: ', location);
-  console.log('params: ', params);
-  console.log('matches: ', matches);
 
-  const [inputText, setInputText] = useState('');
+  const { search } = getQueryParams(location);
+
+  const [inputText, setInputText] = useState(search || '');
   const { dispatch, } = useContext(AppContext);
 
-  useEffect(() => {
-    const { search } = location;
-    const queryParams = search
-      .replace('?', '')
-      .split('&');
-    const params = queryParams.reduce((acc, item) => {
-      const [queryKey, queryVal] = item.split('=');
+  // useEffect(() => {
+  //   const { search } = getQueryParams(location);
 
-      console.log('RES: ', acc);
+  //   if (search) {
+  //     // findText(search);
+  //     setInputText(search);
 
-      return {
-        ...acc,
-        [queryKey]: queryVal,
-      };
-    }, {});
-    console.log('>>>>>>>>>>>>>>>>>>>>>: ', params);
-  }, []);
+  //   }
+  // }, []);
+
+  const findText = (text) => {
+    setInputText(text);
+
+    dispatch({
+      type: "SEARCH_MATERIAL",
+      payload: text,
+    });
+  }
 
   const searchText = (event) => {
     const { target: { value } } = event;
     navigate(`?search=${value}`);
 
-    setInputText(value);
-
-    dispatch({
-      type: "SEARCH_MATERIAL",
-      payload: value,
-    });
+    findText(value);
   }
 
   const clearText = () => {
-    setInputText('');
     navigate('');
 
-    dispatch({
-      type: "SEARCH_MATERIAL",
-      payload: '',
-    });
+    findText('');
   }
 
   return (

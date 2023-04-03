@@ -1,14 +1,60 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Filter from "../Filter";
 import Grid from "@mui/material/Grid";
+import { useNavigate, useLocation } from "react-router-dom";
+import { getQueryParams } from '../../utils/getQueryParams';
+import { replaceUrl } from '../../utils/replaceUrl';
+import { removeQueryParam } from '../../utils/removeQueryParam';
 import { AppContext } from '../../AppContext';
 
 export const FilterBlock = () => {
+  let location = useLocation();
+  let navigate = useNavigate();
+  const queryParams = getQueryParams(location);
+  const { topic: queryTopic, subtopic: querySubTopic } = queryParams;
+  // console.log('queryParams: ', queryParams);
+
+  const [topic, setTopic] = useState(queryTopic || undefined);
+  const [subTopic, setSubTopic] = useState(querySubTopic || undefined);
+
   const { state, dispatch } = useContext(AppContext);
 
+  // dispatch({
+  //   type: 'GENERATE_TOPICS',
+  //   payload: { id: queryTopic }
+  // });
+
   const { topicsInfo, prevSubtopics } = state;
+  console.log('topicsInfo+++++: ', topicsInfo);
+  // useEffect(() => {
+  //   const queryParams = getQueryParams(location);
+  //   const { topic, subtopic } = queryParams;
+
+  //   // console.log('queryParams: ', queryParams);
+  //   // console.log('topicsInfo: ', state.topicsInfo);
+
+  //   if (topic) {
+  //     console.log('TOPIC: ', topic);
+
+  //     // setTopic(topic);
+  //     // findText(search);
+  //     // dispatch({
+  //     //   type: 'GENERATE_TOPICS',
+  //     //   payload: { id: topic }
+  //     // });
+  //   }
+  // }, []);
 
   const getSubTopics = (opts) => {
+    const { search } = location;
+    console.log("getSubTopics---getSubTopics: ", opts);
+    const { id } = opts;
+  
+    let url = replaceUrl(search, 'topic', id);
+    let removeSubtopic = removeQueryParam(url, 'subtopic');
+
+    navigate(removeSubtopic);
+
     dispatch({
       type: 'GENERATE_TOPICS',
       payload: opts
@@ -16,7 +62,15 @@ export const FilterBlock = () => {
   }
 
   const selectSubTopics = (opts) => {
-    if (opts.id === 'allsubtopics') {
+    const { search } = location;
+    console.log("selectSubTopics---selectSubTopics: ", opts);
+    const { id } = opts;
+
+    let url = replaceUrl(search, 'subtopic', id);
+
+    navigate(url);
+  
+    if (id === 'allsubtopics') {
       dispatch({
         type: 'ALL_SUBTOPICS',
         payload: opts
@@ -42,6 +96,7 @@ export const FilterBlock = () => {
           id="topic-filter-block"
           label="Select Main Area"
           values={topicsInfo}
+          value={topic}
           onChange={getSubTopics}
           disabled={!topicsInfo.length}
         />
@@ -53,6 +108,7 @@ export const FilterBlock = () => {
           values={prevSubtopics}
           onChange={selectSubTopics}
           defaultValue
+          value={subTopic}
           disabled={!prevSubtopics.length}
         />
       </Grid>
