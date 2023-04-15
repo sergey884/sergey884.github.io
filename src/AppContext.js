@@ -25,12 +25,14 @@ const applyQuryParam = (initialState, queryParams) => {
     ...initalState
   };
 
+  let isTopic = true;
 
   if (search) {
     const filteredTopics = searchResource(search, materials);
-    // console.log('filteredTopics---filteredTopics: ', search, filteredTopics);
+    console.log('filteredTopics---filteredTopics: ', search, filteredTopics);
     const topicsInfo = generateTopics(filteredTopics);
-    const subtopics = generateSubTopics(topicsInfo, { id: topic });
+    isTopic = isTopicExist(topic, res.topicsInfo);
+    const subtopics = generateSubTopics(topicsInfo, isTopic ? { id: topic } : {});
 
     
     res.filteredTopics = filteredTopics;
@@ -39,8 +41,9 @@ const applyQuryParam = (initialState, queryParams) => {
     res.prevSubtopics = addSelectOption(subtopics, allSubtopicOption);
   }
 
-console.log('AAAAAAAAAA: ', isTopicExist(topic, res.topicsInfo));
-  if (topic) {
+  // const isTopic = isTopicExist(topic, res.topicsInfo);
+console.log('AAAAAAAAAA: ', isTopic);
+  if (topic && isTopic) {
     const topicsInfo = generateTopics(res.filteredTopics);
     const subtopics = generateSubTopics(topicsInfo, { id: topic });
 

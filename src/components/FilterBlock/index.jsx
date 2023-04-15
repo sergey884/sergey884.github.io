@@ -12,38 +12,14 @@ export const FilterBlock = () => {
   let navigate = useNavigate();
   const queryParams = getQueryParams(location);
   const { topic: queryTopic, subtopic: querySubTopic } = queryParams;
-  // console.log('queryParams: ', queryParams);
 
   const [topic, setTopic] = useState(queryTopic || undefined);
   const [subTopic, setSubTopic] = useState(querySubTopic || undefined);
 
   const { state, dispatch } = useContext(AppContext);
 
-  // dispatch({
-  //   type: 'GENERATE_TOPICS',
-  //   payload: { id: queryTopic }
-  // });
-
   const { topicsInfo, prevSubtopics } = state;
-  console.log('topicsInfo+++++: ', topicsInfo);
-  // useEffect(() => {
-  //   const queryParams = getQueryParams(location);
-  //   const { topic, subtopic } = queryParams;
 
-  //   // console.log('queryParams: ', queryParams);
-  //   // console.log('topicsInfo: ', state.topicsInfo);
-
-  //   if (topic) {
-  //     console.log('TOPIC: ', topic);
-
-  //     // setTopic(topic);
-  //     // findText(search);
-  //     // dispatch({
-  //     //   type: 'GENERATE_TOPICS',
-  //     //   payload: { id: topic }
-  //     // });
-  //   }
-  // }, []);
 
   const getSubTopics = (opts) => {
     const { search } = location;

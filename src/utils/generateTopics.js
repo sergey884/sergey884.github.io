@@ -40,9 +40,9 @@ export const generateSubTopics = (topicsInfo, opts = {}) => {
   const { id } = opts;
 
   if (id) {
-    const { subtopics } = topicsInfo.find((it) => it.id === id);
+    const { subtopics } = topicsInfo.find((it) => it.id === id) || {};
 
-    return subtopics;
+    return subtopics || [];
   }
   const firstTopic = topicsInfo[0];
 

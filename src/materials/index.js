@@ -5,6 +5,7 @@ import codingexercise from './codingexercises';
 import architecture from './architecture';
 import designPatterns from './designPatterns';
 import oop from './oop';
+import css from './css';
 
 export const materials = [
   {
@@ -21,6 +22,11 @@ export const materials = [
     id: 'architecture',
     title: "Solution Architecture",
     topics: architecture
+  },
+  {
+    id: 'css',
+    title: "CSS",
+    topics: css
   },
   {
     id: 'performance',

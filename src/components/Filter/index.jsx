@@ -12,14 +12,15 @@ export const Filter = ({
   id,
   value,
 }) => {
+  console.log('VALUE>>>>>>>>>>>: ', value, values[0]?.value);
   const findValue = () => {
     if (value) {
       const { title } = values.find(it => it.id === value) || {};
 
       return title;
     }
-
-    return undefined;
+    console.log('values[0]?.value>>>>>>>>>>>: ', values[0]?.value);
+    return values[0]?.value;
   }
 
   const initialValue = value ? findValue() : (typeof defaultValue !== 'undefined' ? '' : values[0]?.value)
