@@ -6,6 +6,7 @@ import architecture from './architecture';
 import designPatterns from './designPatterns';
 import oop from './oop';
 import css from './css';
+import usefulPlugins from './usefulPlugins';
 
 export const materials = [
   {
@@ -42,6 +43,11 @@ export const materials = [
     id: 'designpatterns',
     title: "Design Patterns",
     topics: designPatterns
+  },
+  {
+    id: 'usefulplugins',
+    title: "Useful Plugins",
+    topics: usefulPlugins
   },
   {
     id: 'oop',

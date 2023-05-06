@@ -13,8 +13,6 @@ export const ResourceCard = ({
     links,
   } = topic;
 
-  // console.log('ResourceCard state: ', topic);
-
   return (
     <Box sx={{ minWidth: 275 }}>
       <Card variant="outlined">

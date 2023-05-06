@@ -5,7 +5,7 @@ import { ResourceCard } from '../ResourseCard';
 export const ResourceList = () => {
   const { state } = useContext(AppContext);
   const { subtopics } = state;
-  console.log('ResourceList: ', subtopics);
+  // console.log('ResourceList: ', subtopics);
 
   return (
     <>

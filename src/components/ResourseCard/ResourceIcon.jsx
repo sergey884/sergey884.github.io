@@ -17,7 +17,6 @@ const IconList = {
 export const ResourceIcon = ({
   type
 }) => {
-  // console.log('Links state: ', links);
 
   return (
     <Avatar>

@@ -14,7 +14,6 @@ export const Links = ({
   links = [],
   id,
 }) => {
-  // console.log('Links state: ', links);
 
   return (
     <Box sx={{ minWidth: 275 }}>
